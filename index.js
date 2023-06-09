@@ -525,7 +525,7 @@ function Pooler(merchantConfig) {
     paymentDetails.style.flexDirection = "column";
     paymentDetails.style.width = "90%";
     paymentDetails.style.marginBottom = "30px";
-    paymentDetails.style.position = "relative"; 
+    paymentDetails.style.position = "relative";
     // paymentDetails.classList.add("payment-details");
 
     // LIST 1
@@ -908,7 +908,7 @@ function Pooler(merchantConfig) {
     paymentDetails.style.width = "90%";
     paymentDetails.style.marginBottom = "30px";
     paymentDetails.style.position = "relative";
-    paymentDetails.style.marginTop = "30px"
+    paymentDetails.style.marginTop = "30px";
 
     // AWAITING REQUEST LOADER
     var awaitingContainer = document.createElement("div");
@@ -1080,21 +1080,27 @@ function Pooler(merchantConfig) {
 
     // secure by pooler
     var secureTextContainer = document.createElement("div");
-    secureTextContainer.className = "absolute footer-text";
+    // secureTextContainer.className = "absolute footer-text";
+    secureTextContainer.style.position = "absolute";
+    secureTextContainer.style.top = "100%";
+    secureTextContainer.style.left = "35%";
+    secureTextContainer.style.fontFamily =
+      '"GraphikMedium", "Source Sans Pro", sans-serif';
     secureTextContainer.style.fontFamily =
       '"GraphikMedium", "Source Sans Pro", sans-serif';
     var htmlContent = document.createElement("div");
     htmlContent.style.display = "flex";
     htmlContent.style.flexDirection = "row";
-    htmlContent.style.paddingTop = "15px";
+    htmlContent.style.paddingTop = "5px";
     htmlContent.style.color = "white";
     htmlContent.style.alignItems = "center";
-    var htmlContent = `<div style="color: #fff; display: flex; flex: row; padding-top:15px; align-items: center;"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-lock" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="#fff" fill="none" stroke-linecap="round" stroke-linejoin="round" style="width: 20px; height: 20px">
+    var htmlContent = `<div style="color: #fff; display: flex; flex: row; padding-top:5px; align-items: center;"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-lock" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="#fff" fill="none" stroke-linecap="round" stroke-linejoin="round" style="width: 20px; height: 20px">
       <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
       <path d="M5 13a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v6a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2v-6z" />
       <path d="M11 16a1 1 0 1 0 2 0a1 1 0 0 0 -2 0" />
       <path d="M8 11v-4a4 4 0 1 1 8 0v4" />
     </svg>&nbsp;<span>Secured by Pooler</span></div>`;
+
     secureTextContainer.innerHTML = htmlContent;
     modalContent.appendChild(secureTextContainer);
 
@@ -1815,4 +1821,3 @@ function Pooler(merchantConfig) {
   payWithPooler();
 }
 //   https://cdn.jsdelivr.net/gh/idris-woodcore/checkout/index.js
-
