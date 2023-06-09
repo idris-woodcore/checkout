@@ -1176,7 +1176,7 @@ function Pooler(merchantConfig) {
         parent.removeChild(desiredChild);
         console.log("yeah");
       }
-    }, 10000);
+    }, 100000);
   }
 
   // SUCCESS MODAL, establishes that payments was successful
@@ -1816,11 +1816,4 @@ function Pooler(merchantConfig) {
   payWithPooler();
 }
 //   https://cdn.jsdelivr.net/gh/idris-woodcore/checkout/index.js
-/**
-   * background-color: rgb(254, 254, 254);
-  margin: auto;
-  width: 100%;
-  border-radius: 8px;
-  position: relative;
-  max-width: 360px;
-   */
+
