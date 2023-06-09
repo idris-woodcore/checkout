@@ -1432,9 +1432,10 @@ function Pooler(merchantConfig) {
     // modalContent.className = "modal-content";
     modalContent.style.backgroundColor = "#fefefe";
     modalContent.style.margin = "auto";
-    modalContent.style.width = "25%";
+    modalContent.style.width = "100%";
     modalContent.style.borderRadius = "8px";
     modalContent.style.position = "relative";
+    modalContent.style.maxWidth = "360px";
 
     var closeBtn = document.createElement("div");
     closeBtn.innerHTML = `<svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1453,7 +1454,7 @@ function Pooler(merchantConfig) {
     closeBtn.style.float = "right";
     closeBtn.style.marginTop = "0px";
     closeBtn.style.position = "absolute";
-    closeBtn.style.right = "-5%";
+    closeBtn.style.right = "-3.5%";
     closeBtn.style.top = "1%";
     closeBtn.style.width = "10px";
     closeBtn.style.height = "10px";
@@ -1511,17 +1512,17 @@ function Pooler(merchantConfig) {
     modalAmount.style.textAlign = "right";
     modalAmount.style.fontSize = "1.125rem";
     modalAmount.style.paddingBottom = "8px";
-    modalAmount.textContent = `NGN${data?.amount}`;
+    modalAmount.textContent = `${data?.amount}`;
     modalAmountEmail.appendChild(modalAmount);
 
     // email
     var modalEmail = document.createElement("div");
     // modalEmail.className = "modal-email modal-em";
-    modalAmount.style.fontFamily =
+    modalEmail.style.fontFamily =
       '"GraphikMedium", "Source Sans Pro", sans-serif';
     modalEmail.style.color = "#8f9bb2";
     modalEmail.style.fontStyle = "normal";
-    modalEmail.style.fontSize = "1.2rem";
+    modalEmail.style.fontSize = "1rem";
     modalEmail.textContent = `${data?.email}`;
     modalAmountEmail.appendChild(modalEmail);
 
@@ -1532,7 +1533,7 @@ function Pooler(merchantConfig) {
     modalBody.style.flexDirection = "column";
     modalBody.style.position = "relative";
     modalBody.style.justifyContent = "center";
-    modalBody.style.paddingTop = "25px";
+    modalBody.style.paddingTop = "25px"
 
     // merchant details
     var paymentDetails = document.createElement("ul");
@@ -1540,8 +1541,10 @@ function Pooler(merchantConfig) {
     paymentDetails.style.listStyleType = "none";
     paymentDetails.style.display = "flex";
     paymentDetails.style.flexDirection = "column";
-    paymentDetails.style.width = "80%";
+    paymentDetails.style.width = "90%";
     paymentDetails.style.marginBottom = "30px";
+    paymentDetails.style.position = "relative";
+    paymentDetails.style.marginTop = "30px";
 
     // SUCCESS CONTAINER
     var successContainer = document.createElement("div");
@@ -1671,7 +1674,7 @@ function Pooler(merchantConfig) {
     copy.style.width = "20px";
     copy.style.height = "20px";
     copy.style.position = "absolute";
-    copy.style.right = "3%";
+    copy.style.left = "102%";
     copy.style.cursor = "pointer";
     // copy.src = "./Icon.svg";
     copy.addEventListener("click", function () {
@@ -1758,10 +1761,10 @@ function Pooler(merchantConfig) {
     var htmlContent = document.createElement("div");
     htmlContent.style.display = "flex";
     htmlContent.style.flexDirection = "row";
-    htmlContent.style.paddingTop = "15px";
+    htmlContent.style.paddingTop = "5px";
     htmlContent.style.color = "white";
     htmlContent.style.alignItems = "center";
-    var htmlContent = `<div style="color: #fff; display: flex; flex: row; padding-top:15px; align-items: center;"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-lock" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="#fff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    var htmlContent = `<div style="color: #fff; display: flex; flex: row; padding-top:5px; align-items: center;"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-lock" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="#fff" fill="none" stroke-linecap="round" stroke-linejoin="round" style="width: 20px; height: 20px">
       <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
       <path d="M5 13a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v6a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2v-6z" />
       <path d="M11 16a1 1 0 1 0 2 0a1 1 0 0 0 -2 0" />
