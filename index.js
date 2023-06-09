@@ -863,6 +863,8 @@ function Pooler(merchantConfig) {
     modalAmountEmail.style.display = "flex";
     modalAmountEmail.style.flexDirection = "column";
     modalAmountEmail.style.marginTop = "0.25rem";
+    modalAmountEmail.style.fontFamily =
+    '"GraphikMedium", "Source Sans Pro", sans-serif';
     modalText.appendChild(modalAmountEmail);
     modalTextParent.appendChild(modalText);
 
@@ -921,6 +923,7 @@ function Pooler(merchantConfig) {
     awaitingContainer.style.paddingTop = "1.5rem";
     awaitingContainer.style.paddingBottom = "1.5rem";
     awaitingContainer.style.justifyContent = "center";
+    awaitingContainer.style.marginTop = "25px";
     modalBody.appendChild(awaitingContainer);
     // loader
     var loader = document.createElement("div");
