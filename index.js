@@ -681,6 +681,8 @@ function Pooler(merchantConfig) {
     timerText.style.textAlign = "center";
     timerText.style.fontFamily =
       '"GraphikMedium", "Source Sans Pro", sans-serif';
+      timerText.textContent = `Expires in 30 : 0`;
+      
     // countdown time
     var duration = 1800;
     var countdown = "";
