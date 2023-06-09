@@ -488,8 +488,8 @@ function Pooler(merchantConfig) {
     modalBody.style.display = "flex";
     modalBody.style.flexDirection = "column";
     modalBody.style.position = "relative";
-    modalBody.style.marginRight = "auto";
-    modalBody.style.width = "91.6667%";
+    // modalBody.style.marginRight = "auto";
+    // modalBody.style.width = "91.6667%";
 
     // make transfer to
     var transferToHeader = document.createElement("div");
@@ -523,8 +523,9 @@ function Pooler(merchantConfig) {
     paymentDetails.style.listStyleType = "none";
     paymentDetails.style.display = "flex";
     paymentDetails.style.flexDirection = "column";
-    paymentDetails.style.width = "86%";
+    paymentDetails.style.width = "90%";
     paymentDetails.style.marginBottom = "30px";
+    paymentDetails.style.position = "relative"; 
     // paymentDetails.classList.add("payment-details");
 
     // LIST 1
@@ -723,7 +724,7 @@ function Pooler(merchantConfig) {
     htmlContent.style.color = "white";
     htmlContent.style.alignItems = "center";
 
-    var htmlContent = `<div style="color: #fff; display: flex; flex: row; padding-top:15px; align-items: center;"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-lock" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="#fff" fill="none" stroke-linecap="round" stroke-linejoin="round" style="width: 20px; height: 20px">
+    var htmlContent = `<div style="color: #fff; display: flex; flex: row; padding-top:5px; align-items: center;"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-lock" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="#fff" fill="none" stroke-linecap="round" stroke-linejoin="round" style="width: 20px; height: 20px">
       <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
       <path d="M5 13a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v6a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2v-6z" />
       <path d="M11 16a1 1 0 1 0 2 0a1 1 0 0 0 -2 0" />
