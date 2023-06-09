@@ -244,31 +244,6 @@ function Pooler(merchantConfig) {
   overlay = document.createElement("div");
 
   // COUNTDOWN SEQUENCE
-  let timer = document.createElement("span");
-  const countdownDuration = 30 * 60 * 1000;
-  function startCountdown() {
-    // Get the current timestamp
-    const startTime = Date.now();
-
-    const intervalId = setInterval(() => {
-      const elapsedTime = Date.now() - startTime;
-      const remainingTime = countdownDuration - elapsedTime;
-      if (remainingTime <= 0) {
-        clearInterval(intervalId);
-        timerElement.innerHTML = "Countdown Finished!";
-      } else {
-        const minutes = Math.floor(remainingTime / (60 * 1000));
-        const seconds = Math.floor((remainingTime % (60 * 1000)) / 1000);
-        timer.textContent = `Expires in ${minutes}min ${seconds}s`;
-        console.log(`Expires in ${minutes}min ${seconds}s`);
-      }
-    }, 1000); // Update every second
-  }
-
-  // window.onload("load", () => {
-  //   startCountdown();
-  // });
-  // console.log(timer)
 
   // trigger overlay, and loader
   function payWithPooler() {
@@ -394,6 +369,8 @@ function Pooler(merchantConfig) {
     overlay.appendChild(spinner);
     document.body.appendChild(overlay);
     // document.head.appendChild(styles);
+
+    // await createDisposableAccount(merchantConfig, woodcoreConfig);
 
     // SET UP CONNECTION TO GENERATE DISPOSABLE ACCOUNT
     setTimeout(function () {
@@ -521,8 +498,6 @@ function Pooler(merchantConfig) {
     modalBody.style.display = "flex";
     modalBody.style.flexDirection = "column";
     modalBody.style.position = "relative";
-    // modalBody.style.marginRight = "auto";
-    // modalBody.style.width = "91.6667%";
 
     // make transfer to
     var transferToHeader = document.createElement("div");
@@ -609,14 +584,12 @@ function Pooler(merchantConfig) {
     // accDetails.className = "payment-detail-bold row-span";
     // accDetails.textContent = `${data?.account_no} || 123456789`;
     accDetails.textContent = `9977639255`;
-    // accDetails.className = "payment-detail-bold text-truncate";
     accDetails.style.fontFamily = "GraphikMedium, sans-serif";
     accDetails.style.fontWeight = "500";
     accDetails.style.color = "#000";
     accDetails.style.display = "flex";
     accDetails.style.flexDirection = "row";
     var copy = document.createElement("div");
-    // copy.className = "copy";
     copy.innerHTML = `<svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M4 14C3.06812 14 2.60218 14 2.23463 13.8478C1.74458 13.6448 1.35523 13.2554 1.15224 12.7654C1 12.3978 1 11.9319 1 11V4.2C1 3.0799 1 2.51984 1.21799 2.09202C1.40973 1.71569 1.71569 1.40973 2.09202 1.21799C2.51984 1 3.0799 1 4.2 1H11C11.9319 1 12.3978 1 12.7654 1.15224C13.2554 1.35523 13.6448 1.74458 13.8478 2.23463C14 2.60218 14 3.06812 14 4M11.2 21H17.8C18.9201 21 19.4802 21 19.908 20.782C20.2843 20.5903 20.5903 20.2843 20.782 19.908C21 19.4802 21 18.9201 21 17.8V11.2C21 10.0799 21 9.51984 20.782 9.09202C20.5903 8.7157 20.2843 8.40973 19.908 8.21799C19.4802 8 18.9201 8 17.8 8H11.2C10.0799 8 9.51984 8 9.09202 8.21799C8.7157 8.40973 8.40973 8.7157 8.21799 9.09202C8 9.51984 8 10.0799 8 11.2V17.8C8 18.9201 8 19.4802 8.21799 19.908C8.40973 20.2843 8.7157 20.5903 9.09202 20.782C9.51984 21 10.0799 21 11.2 21Z" stroke="#CBD1EC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
@@ -743,6 +716,7 @@ function Pooler(merchantConfig) {
         countdown !== undefined ? countdown : ""
       }`;
     }, 1000);
+
     // timerText.textContent = text;
 
     modalFooter.appendChild(timerText);
@@ -1832,7 +1806,45 @@ function Pooler(merchantConfig) {
 
   function createDisposableAccount(merchantConfig, config) {
     overlay.style.display = "none";
+    var duration = 1800;
+    var countdown = "";
+    var text = "";
+    var timer = setInterval(function () {
+      var minutes = Math.floor(duration / 60);
+      var seconds = duration % 60;
+      countdown = minutes + ":" + seconds;
+      if (duration <= 0) {
+        showSessionExpirationModal(data);
+        clearInterval(timer);
+        // Merchantmodal.style.display = "none";
+        // overlay.style.display = "none";
+        // document.body.removeChild(Merchantmodal);
+        // Merchantmodal.parentNode.removeChild(Merchantmodal);
+        // clearInterval(timer);
+        // var childNodes = document.body.childNodes;
+        // var desiredChild = null;
+        // for (var i = 0; i < childNodes.length; i++) {
+        //   if (childNodes[i].id === "merchant-modal") {
+        //     desiredChild = childNodes[i];
+        //     break;
+        //   }
+        // }
+        // if (desiredChild) {
+        //   var parent = desiredChild.parentNode;
+        //   parent.removeChild(desiredChild);
+        //   console.log("yeah");
+        // }
+      }
+      duration--;
+      text = `Expires in ${
+        countdown !== undefined ? countdown : ""
+      }`;
+    }, 1000);
+
+    console.log(timer)
+
     showMerchantModal(merchantConfig);
+
     // const data = {
     //   display_name: merchantConfig?.display_name,
     //   email: merchantConfig?.email,
@@ -1856,6 +1868,7 @@ function Pooler(merchantConfig) {
     //   );
     //   const result = await response.json();
     //   if (response.status === 200) {
+    //     console.log(result, "llk");
     //     overlay.style.display = "none";
     //     showMerchantModal(result);
     //   }
