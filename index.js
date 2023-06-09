@@ -411,7 +411,7 @@ function Pooler(merchantConfig) {
     closeBtn.style.float = "right";
     closeBtn.style.marginTop = "0px";
     closeBtn.style.position = "absolute";
-    closeBtn.style.right = "-5%";
+    closeBtn.style.right = "-3.5%";
     closeBtn.style.top = "1%";
     closeBtn.style.width = "10px";
     closeBtn.style.height = "10px";
@@ -549,6 +549,11 @@ function Pooler(merchantConfig) {
     merchatName.style.fontWeight = "500";
     merchatName.style.color = "#000";
     merchatName.textContent = `${data.display_name}`;
+    merchatName.style.width = "200px";
+    merchatName.style.whiteSpace = "nowrap";
+    merchatName.style.overflow = "hidden";
+    merchatName.style.textAlign = "right";
+    merchatName.style.textOverflow = "ellipsis";
     li1.appendChild(merchant);
     li1.appendChild(merchatName);
 
