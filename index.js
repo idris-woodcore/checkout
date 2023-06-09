@@ -243,6 +243,33 @@ function Pooler(merchantConfig) {
   styles.innerHTML = cssStyles;
   overlay = document.createElement("div");
 
+  // COUNTDOWN SEQUENCE
+  let timer = document.createElement("span");
+  const countdownDuration = 30 * 60 * 1000;
+  function startCountdown() {
+    // Get the current timestamp
+    const startTime = Date.now();
+
+    const intervalId = setInterval(() => {
+      const elapsedTime = Date.now() - startTime;
+      const remainingTime = countdownDuration - elapsedTime;
+      if (remainingTime <= 0) {
+        clearInterval(intervalId);
+        timerElement.innerHTML = "Countdown Finished!";
+      } else {
+        const minutes = Math.floor(remainingTime / (60 * 1000));
+        const seconds = Math.floor((remainingTime % (60 * 1000)) / 1000);
+        timer.textContent = `Expires in ${minutes}min ${seconds}s`;
+        console.log(`Expires in ${minutes}min ${seconds}s`);
+      }
+    }, 1000); // Update every second
+  }
+
+  // window.onload("load", () => {
+  //   startCountdown();
+  // });
+  // console.log(timer)
+
   // trigger overlay, and loader
   function payWithPooler() {
     overlay.style.position = "fixed";
@@ -250,7 +277,7 @@ function Pooler(merchantConfig) {
     overlay.style.left = "0";
     overlay.style.width = "100%";
     overlay.style.height = "100%";
-    overlay.style.backgroundColor = "rgba(0, 0, 0, 0.2)";
+    overlay.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
     overlay.style.display = "flex";
     overlay.style.flexDirection = "row";
     overlay.style.justifyContent = "center";
@@ -391,7 +418,7 @@ function Pooler(merchantConfig) {
     Merchantmodal.style.width = "100%";
     Merchantmodal.style.height = "100%";
     Merchantmodal.style.overflow = "auto";
-    Merchantmodal.style.backgroundColor = "rgb(0, 0, 0, 0.2)";
+    Merchantmodal.style.backgroundColor = "rgb(0, 0, 0, 0.5)";
 
     var modalContent = document.createElement("div");
     modalContent.style.backgroundColor = "#fefefe";
@@ -400,6 +427,7 @@ function Pooler(merchantConfig) {
     modalContent.style.borderRadius = "8px";
     modalContent.style.position = "relative";
     modalContent.style.maxWidth = "360px";
+    modalContent.style.boxShadow = "0 4px 15px 0 rgba(0,0,0,.2)";
 
     var closeBtn = document.createElement("div");
     closeBtn.innerHTML = `<svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -681,7 +709,7 @@ function Pooler(merchantConfig) {
     timerText.style.fontFamily =
       '"GraphikMedium", "Source Sans Pro", sans-serif';
     // countdown time
-    var duration = 10;
+    var duration = 1800;
     var countdown = "";
     var text = "";
     var timer = setInterval(function () {
@@ -804,7 +832,7 @@ function Pooler(merchantConfig) {
     Awaitingmodal.style.width = "100%";
     Awaitingmodal.style.height = "100%";
     Awaitingmodal.style.overflow = "auto";
-    Awaitingmodal.style.backgroundColor = "rgb(0, 0, 0, 0.2)";
+    Awaitingmodal.style.backgroundColor = "rgb(0, 0, 0, 0.5)";
     // modal.className = "modal";
 
     var modalContent = document.createElement("div");
@@ -815,6 +843,7 @@ function Pooler(merchantConfig) {
     modalContent.style.borderRadius = "8px";
     modalContent.style.position = "relative";
     modalContent.style.maxWidth = "360px";
+    modalContent.style.boxShadow = "0 4px 15px 0 rgba(0,0,0,.2)";
 
     var closeBtn = document.createElement("div");
     closeBtn.innerHTML = `<svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1205,7 +1234,7 @@ function Pooler(merchantConfig) {
     modal.style.width = "100%";
     modal.style.height = "100%";
     modal.style.overflow = "auto";
-    modal.style.backgroundColor = "rgb(0, 0, 0, 0.2)";
+    modal.style.backgroundColor = "rgb(0, 0, 0, 0.5)";
     var modalContent = document.createElement("div");
 
     // modalContent.className = "modal-content";
@@ -1215,6 +1244,7 @@ function Pooler(merchantConfig) {
     modalContent.style.borderRadius = "8px";
     modalContent.style.position = "relative";
     modalContent.style.maxWidth = "360px";
+    modalContent.style.boxShadow = "0 4px 15px 0 rgba(0,0,0,.2)";
 
     var closeBtn = document.createElement("div");
     closeBtn.innerHTML = `<svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1426,7 +1456,7 @@ function Pooler(merchantConfig) {
     sessionmodal.style.width = "100%";
     sessionmodal.style.height = "100%";
     sessionmodal.style.overflow = "auto";
-    sessionmodal.style.backgroundColor = "rgb(0, 0, 0, 0.2)";
+    sessionmodal.style.backgroundColor = "rgb(0, 0, 0, 0.5)";
 
     var modalContent = document.createElement("div");
     // modalContent.className = "modal-content";
@@ -1436,6 +1466,7 @@ function Pooler(merchantConfig) {
     modalContent.style.borderRadius = "8px";
     modalContent.style.position = "relative";
     modalContent.style.maxWidth = "360px";
+    modalContent.style.boxShadow = "0 4px 15px 0 rgba(0,0,0,.2)";
 
     var closeBtn = document.createElement("div");
     closeBtn.innerHTML = `<svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1533,7 +1564,7 @@ function Pooler(merchantConfig) {
     modalBody.style.flexDirection = "column";
     modalBody.style.position = "relative";
     modalBody.style.justifyContent = "center";
-    modalBody.style.paddingTop = "25px"
+    modalBody.style.paddingTop = "25px";
 
     // merchant details
     var paymentDetails = document.createElement("ul");
