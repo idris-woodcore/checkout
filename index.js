@@ -455,6 +455,9 @@ function Pooler(merchantConfig) {
     modalAmountEmail.style.display = "flex";
     modalAmountEmail.style.flexDirection = "column";
     modalAmountEmail.style.marginTop = "0.25rem";
+    modalAmountEmail.style.fontFamily =
+      '"GraphikMedium", "Source Sans Pro", sans-serif';
+    modalAmountEmail.style.fontSize = "1rem";
     modalText.appendChild(modalAmountEmail);
     modalTextParent.appendChild(modalText);
 
@@ -479,7 +482,9 @@ function Pooler(merchantConfig) {
       '"GraphikMedium", "Source Sans Pro", sans-serif';
     modalEmail.style.color = "#8f9bb2";
     modalEmail.style.fontStyle = "normal";
-    modalEmail.style.fontSize = "1.2rem";
+    modalEmail.style.fontSize = "1rem";
+    modalEmail.style.fontFamily =
+      '"GraphikMedium", "Source Sans Pro", sans-serif';
     modalEmail.textContent = `${data?.email}`;
     modalAmountEmail.appendChild(modalEmail);
 
@@ -676,7 +681,7 @@ function Pooler(merchantConfig) {
     timerText.style.fontFamily =
       '"GraphikMedium", "Source Sans Pro", sans-serif';
     // countdown time
-    var duration = 1800;
+    var duration = 10;
     var countdown = "";
     var text = "";
     var timer = setInterval(function () {
@@ -803,7 +808,7 @@ function Pooler(merchantConfig) {
     // modal.className = "modal";
 
     var modalContent = document.createElement("div");
-    modalContent.className = "modal-content";
+    // modalContent.className = "modal-content";
     modalContent.style.backgroundColor = "#fefefe";
     modalContent.style.margin = "auto";
     modalContent.style.width = "100%";
@@ -864,7 +869,8 @@ function Pooler(merchantConfig) {
     modalAmountEmail.style.flexDirection = "column";
     modalAmountEmail.style.marginTop = "0.25rem";
     modalAmountEmail.style.fontFamily =
-    '"GraphikMedium", "Source Sans Pro", sans-serif';
+      '"GraphikMedium", "Source Sans Pro", sans-serif';
+    modalAmountEmail.style.fontSize = "1rem";
     modalText.appendChild(modalAmountEmail);
     modalTextParent.appendChild(modalText);
 
@@ -879,17 +885,17 @@ function Pooler(merchantConfig) {
     modalAmount.style.textAlign = "right";
     modalAmount.style.fontSize = "1.125rem";
     modalAmount.style.paddingBottom = "8px";
-    modalAmount.textContent = `NGN${data?.amount}`;
+    modalAmount.textContent = `${data?.amount}`;
     modalAmountEmail.appendChild(modalAmount);
 
     // email
     var modalEmail = document.createElement("div");
     // modalEmail.className = "modal-email modal-em";
-    modalAmount.style.fontFamily =
+    modalEmail.style.fontFamily =
       '"GraphikMedium", "Source Sans Pro", sans-serif';
     modalEmail.style.color = "#8f9bb2";
     modalEmail.style.fontStyle = "normal";
-    modalEmail.style.fontSize = "1.2rem";
+    modalEmail.style.fontSize = "1rem";
     modalEmail.textContent = `${data?.email}`;
     modalAmountEmail.appendChild(modalEmail);
 
@@ -1089,8 +1095,6 @@ function Pooler(merchantConfig) {
     secureTextContainer.style.left = "35%";
     secureTextContainer.style.fontFamily =
       '"GraphikMedium", "Source Sans Pro", sans-serif';
-    secureTextContainer.style.fontFamily =
-      '"GraphikMedium", "Source Sans Pro", sans-serif';
     var htmlContent = document.createElement("div");
     htmlContent.style.display = "flex";
     htmlContent.style.flexDirection = "row";
@@ -1167,7 +1171,7 @@ function Pooler(merchantConfig) {
       }
     });
     setTimeout(function () {
-      successModal(config);
+      successModal(data);
       Awaitingmodal.parentNode.removeChild(Awaitingmodal);
       overlay.style.display = "none";
       Awaitingmodal.style.display = "none";
@@ -1184,7 +1188,7 @@ function Pooler(merchantConfig) {
         parent.removeChild(desiredChild);
         console.log("yeah");
       }
-    }, 10000000000);
+    }, 3000);
   }
 
   // SUCCESS MODAL, establishes that payments was successful
@@ -1203,12 +1207,14 @@ function Pooler(merchantConfig) {
     modal.style.overflow = "auto";
     modal.style.backgroundColor = "rgb(0, 0, 0, 0.2)";
     var modalContent = document.createElement("div");
+
     // modalContent.className = "modal-content";
     modalContent.style.backgroundColor = "#fefefe";
     modalContent.style.margin = "auto";
-    modalContent.style.width = "25%";
+    modalContent.style.width = "100%";
     modalContent.style.borderRadius = "8px";
     modalContent.style.position = "relative";
+    modalContent.style.maxWidth = "360px";
 
     var closeBtn = document.createElement("div");
     closeBtn.innerHTML = `<svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1220,7 +1226,7 @@ function Pooler(merchantConfig) {
     closeBtn.style.float = "right";
     closeBtn.style.marginTop = "0px";
     closeBtn.style.position = "absolute";
-    closeBtn.style.right = "-5%";
+    closeBtn.style.right = "-3.5%";
     closeBtn.style.top = "1%";
     closeBtn.style.width = "10px";
     closeBtn.style.height = "10px";
@@ -1263,6 +1269,9 @@ function Pooler(merchantConfig) {
     modalAmountEmail.style.display = "flex";
     modalAmountEmail.style.flexDirection = "column";
     modalAmountEmail.style.marginTop = "0.25rem";
+    modalAmountEmail.style.fontFamily =
+      '"GraphikMedium", "Source Sans Pro", sans-serif';
+    modalAmountEmail.style.fontSize = "1rem";
     modalText.appendChild(modalAmountEmail);
     modalTextParent.appendChild(modalText);
 
@@ -1278,17 +1287,17 @@ function Pooler(merchantConfig) {
     modalAmount.style.fontSize = "1.125rem";
     modalAmount.style.paddingBottom = "8px";
     // modalAmount.textContent = `NGN${data?.amount}`;
-    modalAmount.textContent = `NGN${data?.amount}`;
+    modalAmount.textContent = `${data?.amount}`;
     modalAmountEmail.appendChild(modalAmount);
 
     // email
     var modalEmail = document.createElement("div");
     // modalEmail.className = "modal-email modal-em";
-    modalAmount.style.fontFamily =
+    modalEmail.style.fontFamily =
       '"GraphikMedium", "Source Sans Pro", sans-serif';
     modalEmail.style.color = "#8f9bb2";
     modalEmail.style.fontStyle = "normal";
-    modalEmail.style.fontSize = "1.2rem";
+    modalEmail.style.fontSize = "1rem";
     modalEmail.textContent = `${data?.email}`;
     modalAmountEmail.appendChild(modalEmail);
 
@@ -1305,9 +1314,6 @@ function Pooler(merchantConfig) {
     // SUCCESS CONTAINER
     var successContainer = document.createElement("div");
     successContainer.style.background = "#F5F6FB";
-    // successContainer.className = "awaiting-container";
-    successContainer.style.marginBottom = "35px";
-    successContainer.style.marginTop = "35px";
     successContainer.style.width = "85%";
     successContainer.style.margin = "auto";
     successContainer.style.display = "flex";
@@ -1319,7 +1325,7 @@ function Pooler(merchantConfig) {
 
     // loader
     var successIcon = document.createElement("div");
-    successIcon = `<svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin: auto; text-align: center; padding-bottom: 15px; padding-top: 15px;">
+    successIcon = `<svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin: auto; text-align: center; padding-bottom: 10px; padding-top: 10px;">
       <g filter="url(#filter0_d_365_8137)">
       <circle cx="39" cy="39" r="39" fill="white"/>
       </g>
@@ -1347,7 +1353,7 @@ function Pooler(merchantConfig) {
     successConfirmation.textContent = "Money received!";
     successConfirmation.className = "transferToMerchant modal-amount";
     successConfirmation.style.textAlign = "center";
-    successConfirmation.style.paddingTop = "25px";
+    successConfirmation.style.paddingTop = "20px";
     successConfirmation.style.paddingBottom = "25px";
     successContainer.appendChild(successConfirmation);
 
@@ -1361,16 +1367,19 @@ function Pooler(merchantConfig) {
 
     // secure by pooler
     var secureTextContainer = document.createElement("div");
-    secureTextContainer.className = "absolute footer-text";
+    // secureTextContainer.className = "absolute footer-text";
+    secureTextContainer.style.position = "absolute";
+    secureTextContainer.style.top = "100%";
+    secureTextContainer.style.left = "35%";
     secureTextContainer.style.fontFamily =
       '"GraphikMedium", "Source Sans Pro", sans-serif';
     var htmlContent = document.createElement("div");
     htmlContent.style.display = "flex";
     htmlContent.style.flexDirection = "row";
-    htmlContent.style.paddingTop = "15px";
+    htmlContent.style.paddingTop = "5px";
     htmlContent.style.color = "white";
     htmlContent.style.alignItems = "center";
-    var htmlContent = `<div style="color: #fff; display: flex; flex: row; padding-top:15px; align-items: center;"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-lock" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="#fff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    var htmlContent = `<div style="color: #fff; display: flex; flex: row; padding-top:5px; align-items: center;"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-lock" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="#fff" fill="none" stroke-linecap="round" stroke-linejoin="round" style="width: 20px; height: 20px">
       <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
       <path d="M5 13a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v6a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2v-6z" />
       <path d="M11 16a1 1 0 1 0 2 0a1 1 0 0 0 -2 0" />
