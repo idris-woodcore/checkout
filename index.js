@@ -71,14 +71,6 @@ function Pooler(merchantConfig) {
       "skl_D+7m+90BNNcyV7SM0sb/iEdIaMfRUPUnzsKx0KiN7H9LNtT+m5NTZamT567TmYE0UzbhK7LwAN3xh47NMosZ8g==",
   };
 
-  let iframe = document.createElement("iframe");
-  iframe.style.width = "100%";
-  iframe.style.height = "100%";
-  iframe.style.position = "fixed";
-  iframe.style.top = "0";
-  iframe.style.left = "0";
-  iframe.style.zIndex = "9999";
-
   var styles = document.createElement("style");
   var cssStyles = `
   .spinner {
@@ -251,7 +243,7 @@ function Pooler(merchantConfig) {
     overlay.style.left = "0";
     overlay.style.width = "100%";
     overlay.style.height = "100%";
-    overlay.style.backgroundColor = "rgba(0, 0, 0, 0.3)";
+    overlay.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
     overlay.style.display = "flex";
     overlay.style.flexDirection = "row";
     overlay.style.justifyContent = "center";
@@ -428,7 +420,7 @@ function Pooler(merchantConfig) {
     Merchantmodal.style.width = "100%";
     Merchantmodal.style.height = "100%";
     Merchantmodal.style.overflow = "auto";
-    Merchantmodal.style.backgroundColor = "rgb(0, 0, 0, 0.3)";
+    Merchantmodal.style.backgroundColor = "rgb(0, 0, 0, 0.5)";
 
     var modalContent = document.createElement("div");
     modalContent.setAttribute("id", "merchant-content");
@@ -1541,7 +1533,7 @@ function Pooler(merchantConfig) {
     sessionmodal.style.width = "100%";
     sessionmodal.style.height = "100%";
     sessionmodal.style.overflow = "auto";
-    sessionmodal.style.backgroundColor = "rgb(0, 0, 0, 0.3)";
+    sessionmodal.style.backgroundColor = "rgb(0, 0, 0, 0.5)";
 
     var modalContent = document.createElement("div");
     // modalContent.className = "modal-content";
