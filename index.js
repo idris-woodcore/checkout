@@ -1,9 +1,3 @@
-// import "../src/style.css";
-// import closeIcon from "./assets/Icon (1).svg";
-// import poolerLogo from "./assets/Poolerlogo.svg";
-// import copyIcon from "./assets/Icon.svg";
-// import "./assets/fonts/Graphik-Medium.ttf";
-// import "./assets/fonts/Graphik-Regular.ttf";
 
 let modalStylesEle = document.createElement("style");
 let modalStyles = `
@@ -49,7 +43,6 @@ let modalStyles = `
 `;
 
 function Pooler(merchantConfig) {
-  console.log("yes");
   let overlay = "";
 
   const woodcoreConfig = {
@@ -243,7 +236,7 @@ function Pooler(merchantConfig) {
     overlay.style.left = "0";
     overlay.style.width = "100%";
     overlay.style.height = "100%";
-    overlay.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
+    overlay.style.backgroundColor = "rgba(0, 0, 0, 0.3)";
     overlay.style.display = "flex";
     overlay.style.flexDirection = "row";
     overlay.style.justifyContent = "center";
@@ -387,7 +380,6 @@ function Pooler(merchantConfig) {
     });
 
     document.body.appendChild(iframe);
-    // document.head.appendChild(styles);
 
     // await createDisposableAccount(merchantConfig, woodcoreConfig);
 
@@ -420,7 +412,7 @@ function Pooler(merchantConfig) {
     Merchantmodal.style.width = "100%";
     Merchantmodal.style.height = "100%";
     Merchantmodal.style.overflow = "auto";
-    Merchantmodal.style.backgroundColor = "rgb(0, 0, 0, 0.5)";
+    Merchantmodal.style.backgroundColor = "rgb(0, 0, 0, 0.3)";
 
     var modalContent = document.createElement("div");
     modalContent.setAttribute("id", "merchant-content");
@@ -1533,7 +1525,7 @@ function Pooler(merchantConfig) {
     sessionmodal.style.width = "100%";
     sessionmodal.style.height = "100%";
     sessionmodal.style.overflow = "auto";
-    sessionmodal.style.backgroundColor = "rgb(0, 0, 0, 0.5)";
+    sessionmodal.style.backgroundColor = "rgb(0, 0, 0, 0.3)";
 
     var modalContent = document.createElement("div");
     // modalContent.className = "modal-content";

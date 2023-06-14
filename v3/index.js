@@ -1,9 +1,3 @@
-// import "../src/style.css";
-// import closeIcon from "./assets/Icon (1).svg";
-// import poolerLogo from "./assets/Poolerlogo.svg";
-// import copyIcon from "./assets/Icon.svg";
-// import "./assets/fonts/Graphik-Medium.ttf";
-// import "./assets/fonts/Graphik-Regular.ttf";
 
 let modalStylesEle = document.createElement("style");
 let modalStyles = `
@@ -49,7 +43,6 @@ let modalStyles = `
 `;
 
 function Pooler(merchantConfig) {
-  console.log("yes");
   let overlay = "";
 
   const woodcoreConfig = {
@@ -70,14 +63,6 @@ function Pooler(merchantConfig) {
     "x-key":
       "skl_D+7m+90BNNcyV7SM0sb/iEdIaMfRUPUnzsKx0KiN7H9LNtT+m5NTZamT567TmYE0UzbhK7LwAN3xh47NMosZ8g==",
   };
-
-  let iframe = document.createElement("iframe");
-  iframe.style.width = "100%";
-  iframe.style.height = "100%";
-  iframe.style.position = "fixed";
-  iframe.style.top = "0";
-  iframe.style.left = "0";
-  iframe.style.zIndex = "9999";
 
   var styles = document.createElement("style");
   var cssStyles = `
@@ -395,7 +380,6 @@ function Pooler(merchantConfig) {
     });
 
     document.body.appendChild(iframe);
-    // document.head.appendChild(styles);
 
     // await createDisposableAccount(merchantConfig, woodcoreConfig);
 
