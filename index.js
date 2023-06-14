@@ -71,7 +71,6 @@ function Pooler(merchantConfig) {
       "skl_D+7m+90BNNcyV7SM0sb/iEdIaMfRUPUnzsKx0KiN7H9LNtT+m5NTZamT567TmYE0UzbhK7LwAN3xh47NMosZ8g==",
   };
 
-  var host = window.location.host;
   let iframe = document.createElement("iframe");
   iframe.style.width = "100%";
   iframe.style.height = "100%";
@@ -252,7 +251,7 @@ function Pooler(merchantConfig) {
     overlay.style.left = "0";
     overlay.style.width = "100%";
     overlay.style.height = "100%";
-    overlay.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
+    overlay.style.backgroundColor = "rgba(0, 0, 0, 0.3)";
     overlay.style.display = "flex";
     overlay.style.flexDirection = "row";
     overlay.style.justifyContent = "center";
@@ -367,23 +366,57 @@ function Pooler(merchantConfig) {
     }
     overlay.appendChild(spinnerContainer);
     overlay.appendChild(spinner);
-    document.body.appendChild(overlay);
+    // create iframe
+    var iframe = document.createElement("iframe");
+    iframe.id = "pooler-iframe";
+    iframe.style.position = "fixed";
+    iframe.style.top = "0";
+    iframe.style.left = "0";
+    iframe.style.width = "100%";
+    iframe.style.height = "100%";
+    iframe.style.border = "none";
+    iframe.style.display = "flex";
+    iframe.style.flexDirection = "row";
+    iframe.style.justifyContent = "center";
+    iframe.style.alignItems = "center";
+    iframe.style.background = "transparent";
+    // document.body.appendChild(overlay);
+    // append overlay to iframe
+    iframe.addEventListener("load", () => {
+      var iframeWindow = iframe.contentWindow;
+      iframeWindow.document.body.appendChild(overlay);
+      setTimeout(function () {
+        overlay.style.backgroundColor = "transparent";
+        spinner.style.display = "none";
+        overlay.style.display = "none";
+        iframe.style.display = "none";
+        createDisposableAccount(merchantConfig, woodcoreConfig);
+      }, 3000);
+    });
+
+    document.body.appendChild(iframe);
     // document.head.appendChild(styles);
 
     // await createDisposableAccount(merchantConfig, woodcoreConfig);
 
     // SET UP CONNECTION TO GENERATE DISPOSABLE ACCOUNT
-    setTimeout(function () {
-      spinner.style.display = "none";
-      overlay.style.display = "none";
-      createDisposableAccount(merchantConfig, woodcoreConfig);
-    }, 3000);
   }
 
   // shows merchant details modal
   function showMerchantModal(config) {
     // const data = response?.data;
     const data = config;
+    // create iframe for merchant details modal
+    var merchantIframe = document.createElement("iframe");
+    merchantIframe.id = "merchant-iframe";
+    merchantIframe.style.position = "fixed";
+    merchantIframe.style.top = "0";
+    merchantIframe.style.left = "0";
+    merchantIframe.style.width = "100%";
+    merchantIframe.style.height = "100%";
+    merchantIframe.style.border = "none";
+    merchantIframe.style.display = "flex";
+
     var Merchantmodal = document.createElement("div");
     Merchantmodal.setAttribute("id", "merchant-modal");
     Merchantmodal.style.display = "block";
@@ -395,9 +428,10 @@ function Pooler(merchantConfig) {
     Merchantmodal.style.width = "100%";
     Merchantmodal.style.height = "100%";
     Merchantmodal.style.overflow = "auto";
-    Merchantmodal.style.backgroundColor = "rgb(0, 0, 0, 0.5)";
+    Merchantmodal.style.backgroundColor = "rgb(0, 0, 0, 0.3)";
 
     var modalContent = document.createElement("div");
+    modalContent.setAttribute("id", "merchant-content");
     modalContent.style.backgroundColor = "#fefefe";
     modalContent.style.margin = "auto";
     modalContent.style.width = "100%";
@@ -407,7 +441,7 @@ function Pooler(merchantConfig) {
     modalContent.style.boxShadow = "0 4px 15px 0 rgba(0,0,0,.2)";
 
     var closeBtn = document.createElement("div");
-    closeBtn.innerHTML = `<svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+    closeBtn.innerHTML = `<svg width="10" height="10" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" id="close-svg">
       <path d="M11 1L1 11M1 1L11 11" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
       `;
@@ -416,11 +450,17 @@ function Pooler(merchantConfig) {
     closeBtn.style.float = "right";
     closeBtn.style.marginTop = "0px";
     closeBtn.style.position = "absolute";
-    closeBtn.style.right = "-3.5%";
+    closeBtn.style.right = "-6.5%";
     closeBtn.style.top = "1%";
     closeBtn.style.width = "10px";
     closeBtn.style.height = "10px";
     closeBtn.style.cursor = "pointer";
+
+    // closeBtn.addEventListener("mouseover", function () {
+    //   closeBtn.style.backgroundColor = "red";
+    //   closeBtn.style.border = "1px solid red";
+    //   closeBtn.style.borderRadius = "100%";
+    // });
 
     // modal text parent
     var modalTextParent = document.createElement("div");
@@ -506,7 +546,7 @@ function Pooler(merchantConfig) {
     transferToHeader.style.marginTop = "35px";
     var transferTo = document.createElement("div");
     // transferTo.className = "transfer-to transferTo";
-    transferTo.textContent = "Make transfer to";
+    transferTo.textContent = "Make Transfer to";
     transferTo.style.textAlign = "center";
     transferTo.style.fontFamily = "GraphikRegular, sans-serif";
     transferTo.style.color = "#8f9bb2";
@@ -531,7 +571,7 @@ function Pooler(merchantConfig) {
     paymentDetails.style.listStyleType = "none";
     paymentDetails.style.display = "flex";
     paymentDetails.style.flexDirection = "column";
-    paymentDetails.style.width = "90%";
+    paymentDetails.style.width = "79%";
     paymentDetails.style.marginBottom = "30px";
     paymentDetails.style.position = "relative";
     // paymentDetails.classList.add("payment-details");
@@ -590,7 +630,7 @@ function Pooler(merchantConfig) {
     accDetails.style.display = "flex";
     accDetails.style.flexDirection = "row";
     var copy = document.createElement("div");
-    copy.innerHTML = `<svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+    copy.innerHTML = `<svg width="16" height="16" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M4 14C3.06812 14 2.60218 14 2.23463 13.8478C1.74458 13.6448 1.35523 13.2554 1.15224 12.7654C1 12.3978 1 11.9319 1 11V4.2C1 3.0799 1 2.51984 1.21799 2.09202C1.40973 1.71569 1.71569 1.40973 2.09202 1.21799C2.51984 1 3.0799 1 4.2 1H11C11.9319 1 12.3978 1 12.7654 1.15224C13.2554 1.35523 13.6448 1.74458 13.8478 2.23463C14 2.60218 14 3.06812 14 4M11.2 21H17.8C18.9201 21 19.4802 21 19.908 20.782C20.2843 20.5903 20.5903 20.2843 20.782 19.908C21 19.4802 21 18.9201 21 17.8V11.2C21 10.0799 21 9.51984 20.782 9.09202C20.5903 8.7157 20.2843 8.40973 19.908 8.21799C19.4802 8 18.9201 8 17.8 8H11.2C10.0799 8 9.51984 8 9.09202 8.21799C8.7157 8.40973 8.40973 8.7157 8.21799 9.09202C8 9.51984 8 10.0799 8 11.2V17.8C8 18.9201 8 19.4802 8.21799 19.908C8.40973 20.2843 8.7157 20.5903 9.09202 20.782C9.51984 21 10.0799 21 11.2 21Z" stroke="#CBD1EC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
       `;
@@ -599,6 +639,7 @@ function Pooler(merchantConfig) {
     copy.style.position = "absolute";
     copy.style.left = "102%";
     copy.style.cursor = "pointer";
+    copy.style.top = "8%";
     copy.src = "./Icon.svg";
     copy.addEventListener("click", () => {
       // navigator.clipboard.writeText(`${data?.account_no}`);
@@ -621,24 +662,25 @@ function Pooler(merchantConfig) {
     li3.style.borderBottom = "0px";
     var bank = document.createElement("span");
     // bank.className = "payment-detail-text modal-email";
-    bank.textContent = "Bank name";
+    bank.textContent = "Bank Name";
     bank.style.fontFamily = "GraphikRegular, sans-serif";
     bank.style.color = "#8f9bb2";
     var bankDetails = document.createElement("span");
     // bankDetails.className = "payment-detail-bold text-truncate";
-    bankDetails.textContent = "LIFEGATE MICROFINANCE BANK";
-    bankDetails.style.width = "200px";
+    bankDetails.textContent = "Kredi Money MFB";
+    bankDetails.style.width = "125px";
     bankDetails.style.whiteSpace = "nowrap";
     bankDetails.style.overflow = "hidden";
     bankDetails.style.textOverflow = "ellipsis";
     bankDetails.style.fontFamily = "GraphikMedium, sans-serif";
     bankDetails.style.fontWeight = "500";
+    bankDetails.style.textAlign = "right";
     bankDetails.style.color = "#000";
     li3.appendChild(bank);
     li3.appendChild(bankDetails);
 
     // UL MAKE UP
-    paymentDetails.appendChild(li1);
+    // paymentDetails.appendChild(li1);
     paymentDetails.appendChild(li2);
     paymentDetails.appendChild(li3);
     modalBody.appendChild(paymentDetails);
@@ -657,8 +699,7 @@ function Pooler(merchantConfig) {
     // paybutton.className = "modal-btn";
     paybutton.style.fontFamily =
       '"GraphikMedium", "Source Sans Pro", sans-serif';
-    paybutton.style.background =
-      "linear-gradient(178.53deg, #2c1dff 1.25%, #261bc1 165.23%)";
+    paybutton.style.background = "#2C1DFF";
     paybutton.style.borderRadius = "8px";
     paybutton.style.textAlign = "center";
     paybutton.style.color = "#fff";
@@ -667,8 +708,7 @@ function Pooler(merchantConfig) {
     paybutton.style.height = "2.75rem";
     paybutton.style.fontSize = "1.125rem";
     paybutton.style.margin = "0 auto";
-    paybutton.style.border =
-      "linear-gradient(178.53deg, #2c1dff 1.25%, #261bc1 165.23%)";
+    paybutton.style.border = "0px";
     paybutton.style.cursor = "pointer";
     paybutton.textContent = "I have sent the money";
     paybutton.style.zIndex = "999";
@@ -681,8 +721,8 @@ function Pooler(merchantConfig) {
     timerText.style.textAlign = "center";
     timerText.style.fontFamily =
       '"GraphikMedium", "Source Sans Pro", sans-serif';
-      timerText.textContent = `Expires in 30:0`;
-      
+    timerText.textContent = `Expires in 30:0`;
+
     // countdown time
     var duration = 1799;
     var countdown = "";
@@ -728,17 +768,17 @@ function Pooler(merchantConfig) {
     // secureTextContainer.className = "absolute footer-text";
     secureTextContainer.style.position = "absolute";
     secureTextContainer.style.top = "100%";
-    secureTextContainer.style.left = "35%";
+    secureTextContainer.style.left = "27%";
     secureTextContainer.style.fontFamily =
       '"GraphikMedium", "Source Sans Pro", sans-serif';
     var htmlContent = document.createElement("div");
     htmlContent.style.display = "flex";
     htmlContent.style.flexDirection = "row";
-    htmlContent.style.paddingTop = "5px";
+    htmlContent.style.paddingTop = "8px";
     htmlContent.style.color = "white";
     htmlContent.style.alignItems = "center";
 
-    var htmlContent = `<div style="color: #fff; display: flex; flex: row; padding-top:5px; align-items: center;"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-lock" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="#fff" fill="none" stroke-linecap="round" stroke-linejoin="round" style="width: 20px; height: 20px">
+    var htmlContent = `<div style="color: #fff; display: flex; flex: row; padding-top:8px; align-items: center;"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-lock" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="#fff" fill="none" stroke-linecap="round" stroke-linejoin="round" style="width: 20px; height: 20px">
       <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
       <path d="M5 13a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v6a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2v-6z" />
       <path d="M11 16a1 1 0 1 0 2 0a1 1 0 0 0 -2 0" />
@@ -747,6 +787,7 @@ function Pooler(merchantConfig) {
 
     secureTextContainer.innerHTML = htmlContent;
     modalContent.appendChild(secureTextContainer);
+    // modalFooter.appendChild(secureTextContainer);
 
     // MODAL BUILD UP
     modalContent.appendChild(closeBtn);
@@ -754,16 +795,19 @@ function Pooler(merchantConfig) {
     modalContent.appendChild(modalFooter);
     Merchantmodal.appendChild(modalContent);
     // overlay.appendChild(modal);
-    document.body.appendChild(Merchantmodal); // Append modal to the document body
+    merchantIframe.addEventListener("load", () => {
+      var iframeWindow = merchantIframe.contentWindow;
+      iframeWindow.document.body.appendChild(Merchantmodal);
+    });
+    document.body.appendChild(merchantIframe); // Append modal to the document body
 
     closeBtn.addEventListener("click", function () {
-      Merchantmodal.parentNode.removeChild(Merchantmodal);
-      Merchantmodal.style.display = "none";
-      overlay.style.display = "none";
+      merchantIframe.parentNode.removeChild(merchantIframe);
+      merchantIframe.style.display = "none";
       var childNodes = document.body.childNodes;
       var desiredChild = null;
       for (var i = 0; i < childNodes.length; i++) {
-        if (childNodes[i].id === "merchant-modal") {
+        if (childNodes[i].id === "merchant-iframe") {
           desiredChild = childNodes[i];
           break;
         }
@@ -771,18 +815,18 @@ function Pooler(merchantConfig) {
       if (desiredChild) {
         var parent = desiredChild.parentNode;
         parent.removeChild(desiredChild);
-        console.log("yeah");
       }
     });
 
     paybutton.addEventListener("click", function () {
       showAwaitingModal(data);
-      Merchantmodal.parentNode.removeChild(Merchantmodal);
       clearInterval(timer);
+      merchantIframe.parentNode.removeChild(merchantIframe);
+      merchantIframe.style.display = "none";
       var childNodes = document.body.childNodes;
       var desiredChild = null;
       for (var i = 0; i < childNodes.length; i++) {
-        if (childNodes[i].id === "merchant-modal") {
+        if (childNodes[i].id === "merchant-iframe") {
           desiredChild = childNodes[i];
           break;
         }
@@ -790,13 +834,23 @@ function Pooler(merchantConfig) {
       if (desiredChild) {
         var parent = desiredChild.parentNode;
         parent.removeChild(desiredChild);
-        console.log("yeah");
       }
     });
   }
 
   // show awaiting payment while socket is opened
   function showAwaitingModal(data) {
+    // spin up an iframe for awaiting modal
+    var awaitingIframe = document.createElement("iframe");
+    awaitingIframe.id = "awaiting-iframe";
+    awaitingIframe.style.position = "fixed";
+    awaitingIframe.style.top = "0";
+    awaitingIframe.style.left = "0";
+    awaitingIframe.style.width = "100%";
+    awaitingIframe.style.height = "100%";
+    awaitingIframe.style.border = "none";
+    awaitingIframe.style.display = "flex";
+
     var Awaitingmodal = document.createElement("div");
     Awaitingmodal.setAttribute("id", "awaiting-modal");
     Awaitingmodal.style.display = "block";
@@ -831,7 +885,7 @@ function Pooler(merchantConfig) {
     closeBtn.style.float = "right";
     closeBtn.style.marginTop = "0px";
     closeBtn.style.position = "absolute";
-    closeBtn.style.right = "-3.5%";
+    closeBtn.style.right = "-6.5%";
     closeBtn.style.top = "1%";
     closeBtn.style.width = "10px";
     closeBtn.style.height = "10px";
@@ -918,7 +972,7 @@ function Pooler(merchantConfig) {
     paymentDetails.style.listStyleType = "none";
     paymentDetails.style.display = "flex";
     paymentDetails.style.flexDirection = "column";
-    paymentDetails.style.width = "90%";
+    paymentDetails.style.width = "79%";
     paymentDetails.style.marginBottom = "30px";
     paymentDetails.style.position = "relative";
     paymentDetails.style.marginTop = "30px";
@@ -949,6 +1003,20 @@ function Pooler(merchantConfig) {
     loader.style.margin = "auto";
     var style = document.createElement("style");
     style.innerHTML = `
+    .spinner-small {
+      border: 6px solid #f3f3f3;
+      border-top: 6px solid #261bc1;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 0.5s linear infinite;
+    }
+    
+    .spinner-centered {
+      text-align: center;
+      margin-left: auto;
+      margin-right: auto;
+    }
   @keyframes spin {
     0% {
       transform: rotate(0deg);
@@ -1039,7 +1107,7 @@ function Pooler(merchantConfig) {
     accDetails.style.flexDirection = "row";
     var copy = document.createElement("div");
     copy.className = "copy";
-    copy.innerHTML = `<svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+    copy.innerHTML = `<svg width="16" height="16" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M4 14C3.06812 14 2.60218 14 2.23463 13.8478C1.74458 13.6448 1.35523 13.2554 1.15224 12.7654C1 12.3978 1 11.9319 1 11V4.2C1 3.0799 1 2.51984 1.21799 2.09202C1.40973 1.71569 1.71569 1.40973 2.09202 1.21799C2.51984 1 3.0799 1 4.2 1H11C11.9319 1 12.3978 1 12.7654 1.15224C13.2554 1.35523 13.6448 1.74458 13.8478 2.23463C14 2.60218 14 3.06812 14 4M11.2 21H17.8C18.9201 21 19.4802 21 19.908 20.782C20.2843 20.5903 20.5903 20.2843 20.782 19.908C21 19.4802 21 18.9201 21 17.8V11.2C21 10.0799 21 9.51984 20.782 9.09202C20.5903 8.7157 20.2843 8.40973 19.908 8.21799C19.4802 8 18.9201 8 17.8 8H11.2C10.0799 8 9.51984 8 9.09202 8.21799C8.7157 8.40973 8.40973 8.7157 8.21799 9.09202C8 9.51984 8 10.0799 8 11.2V17.8C8 18.9201 8 19.4802 8.21799 19.908C8.40973 20.2843 8.7157 20.5903 9.09202 20.782C9.51984 21 10.0799 21 11.2 21Z" stroke="#CBD1EC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
       `;
@@ -1076,7 +1144,7 @@ function Pooler(merchantConfig) {
     var bankDetails = document.createElement("span");
     bankDetails.className = "payment-detail-bold text-truncate";
     bankDetails.textContent = "LIFEGATE MICROFINANCE BANK";
-    bankDetails.style.width = "200px";
+    bankDetails.style.width = "125px";
     bankDetails.style.whiteSpace = "nowrap";
     bankDetails.style.overflow = "hidden";
     bankDetails.style.textOverflow = "ellipsis";
@@ -1097,7 +1165,7 @@ function Pooler(merchantConfig) {
     // secureTextContainer.className = "absolute footer-text";
     secureTextContainer.style.position = "absolute";
     secureTextContainer.style.top = "100%";
-    secureTextContainer.style.left = "35%";
+    secureTextContainer.style.left = "27%";
     secureTextContainer.style.fontFamily =
       '"GraphikMedium", "Source Sans Pro", sans-serif';
     var htmlContent = document.createElement("div");
@@ -1119,7 +1187,14 @@ function Pooler(merchantConfig) {
     modalContent.appendChild(closeBtn);
     modalContent.appendChild(modalBody);
     Awaitingmodal.appendChild(modalContent);
-    document.body.appendChild(Awaitingmodal);
+    // document.body.appendChild(Awaitingmodal);
+
+    awaitingIframe.addEventListener("load", () => {
+      var iframeWindow = awaitingIframe.contentWindow;
+      iframeWindow.document.head.appendChild(style);
+      iframeWindow.document.body.appendChild(Awaitingmodal);
+    });
+    document.body.appendChild(awaitingIframe);
 
     // SET UP WEBSOCKET CONNECTION
     // if (host == woodcoreConfig.dev) {
@@ -1156,7 +1231,7 @@ function Pooler(merchantConfig) {
     // });
 
     closeBtn.addEventListener("click", function () {
-      Awaitingmodal.parentNode.removeChild(Awaitingmodal);
+      awaitingIframe.parentNode.removeChild(awaitingIframe);
       // window.alert("payment cancelled");
       // socket.addEventListener("close", (event) => {});
       Awaitingmodal.style.display = "none";
@@ -1164,7 +1239,7 @@ function Pooler(merchantConfig) {
       var childNodes = document.body.childNodes;
       var desiredChild = null;
       for (var i = 0; i < childNodes.length; i++) {
-        if (childNodes[i].id === "awaiting-modal") {
+        if (childNodes[i].id === "awaiting-iframe") {
           desiredChild = childNodes[i];
           break;
         }
@@ -1172,32 +1247,43 @@ function Pooler(merchantConfig) {
       if (desiredChild) {
         var parent = desiredChild.parentNode;
         parent.removeChild(desiredChild);
-        console.log("yeah");
       }
     });
-    setTimeout(function () {
-      successModal(data);
-      Awaitingmodal.parentNode.removeChild(Awaitingmodal);
-      overlay.style.display = "none";
-      Awaitingmodal.style.display = "none";
-      var childNodes = document.body.childNodes;
-      var desiredChild = null;
-      for (var i = 0; i < childNodes.length; i++) {
-        if (childNodes[i].id === "awaiting-modal") {
-          desiredChild = childNodes[i];
-          break;
-        }
-      }
-      if (desiredChild) {
-        var parent = desiredChild.parentNode;
-        parent.removeChild(desiredChild);
-        console.log("yeah");
-      }
-    }, 3000);
+    // setTimeout(function () {
+    //   successModal(data);
+    //   awaitingIframe.parentNode.removeChild(awaitingIframe);
+    //   // window.alert("payment cancelled");
+    //   // socket.addEventListener("close", (event) => {});
+    //   Awaitingmodal.style.display = "none";
+    //   overlay.style.display = "none";
+    //   var childNodes = document.body.childNodes;
+    //   var desiredChild = null;
+    //   for (var i = 0; i < childNodes.length; i++) {
+    //     if (childNodes[i].id === "awaiting-iframe") {
+    //       desiredChild = childNodes[i];
+    //       break;
+    //     }
+    //   }
+    //   if (desiredChild) {
+    //     var parent = desiredChild.parentNode;
+    //     parent.removeChild(desiredChild);
+    //   }
+    // }, 10000);
   }
 
   // SUCCESS MODAL, establishes that payments was successful
   function successModal(data) {
+    // spins up iframe for success modal
+    var successIframe = document.createElement("iframe");
+    successIframe.id = "success-iframe";
+    successIframe.style.position = "fixed";
+    successIframe.style.top = "0";
+    successIframe.style.left = "0";
+    successIframe.style.width = "100%";
+    successIframe.style.height = "100%";
+    successIframe.style.border = "none";
+    successIframe.style.display = "flex";
+
     var modal = document.createElement("div");
     modal.setAttribute("id", "success-modal");
     // modal.className = "modal";
@@ -1220,7 +1306,7 @@ function Pooler(merchantConfig) {
     modalContent.style.borderRadius = "8px";
     modalContent.style.position = "relative";
     modalContent.style.maxWidth = "360px";
-    modalContent.style.boxShadow = "0 4px 15px 0 rgba(0,0,0,.2)";
+    modalContent.style.boxShadow = "0 4px 15px 0 rgba(0,0,0,.5)";
 
     var closeBtn = document.createElement("div");
     closeBtn.innerHTML = `<svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1232,7 +1318,7 @@ function Pooler(merchantConfig) {
     closeBtn.style.float = "right";
     closeBtn.style.marginTop = "0px";
     closeBtn.style.position = "absolute";
-    closeBtn.style.right = "-3.5%";
+    closeBtn.style.right = "-6.5%";
     closeBtn.style.top = "1%";
     closeBtn.style.width = "10px";
     closeBtn.style.height = "10px";
@@ -1358,6 +1444,8 @@ function Pooler(merchantConfig) {
     var successConfirmation = document.createElement("div");
     successConfirmation.textContent = "Money received!";
     successConfirmation.className = "transferToMerchant modal-amount";
+    successConfirmation.style.fontFamily =
+      '"GraphikMedium", "Source Sans Pro", sans-serif';
     successConfirmation.style.textAlign = "center";
     successConfirmation.style.paddingTop = "20px";
     successConfirmation.style.paddingBottom = "25px";
@@ -1366,6 +1454,9 @@ function Pooler(merchantConfig) {
     var successMessage = document.createElement("div");
     successMessage.className = "awaiting-message modal-email";
     successMessage.textContent = "Your transaction have been confirmed.";
+    successMessage.style.fontFamily =
+      '"GraphikMedium", "Source Sans Pro", sans-serif';
+    successMessage.style.color = "#8f9bb2";
     successMessage.style.textAlign = "center";
     successMessage.style.marginLeft = "auto";
     successMessage.style.marginRight = "auto";
@@ -1376,7 +1467,7 @@ function Pooler(merchantConfig) {
     // secureTextContainer.className = "absolute footer-text";
     secureTextContainer.style.position = "absolute";
     secureTextContainer.style.top = "100%";
-    secureTextContainer.style.left = "35%";
+    secureTextContainer.style.left = "27%";
     secureTextContainer.style.fontFamily =
       '"GraphikMedium", "Source Sans Pro", sans-serif';
     var htmlContent = document.createElement("div");
@@ -1397,7 +1488,13 @@ function Pooler(merchantConfig) {
     modalContent.appendChild(closeBtn);
     modalContent.appendChild(modalBody);
     modal.appendChild(modalContent);
-    document.body.appendChild(modal);
+    // document.body.appendChild(modal);
+
+    successIframe.addEventListener("load", () => {
+      var iframeWindow = successIframe.contentWindow;
+      iframeWindow.document.body.appendChild(modal);
+    });
+    document.body.appendChild(successIframe);
 
     closeBtn.addEventListener("click", function () {
       modal.style.display = "none";
@@ -1416,10 +1513,22 @@ function Pooler(merchantConfig) {
         console.log("yeah");
       }
     });
+    // onSuccess callback implementation
   }
 
   // session expiration and error handling modal
   function showSessionExpirationModal(data) {
+    // spins up session expiration iframe
+    var sessionIframe = document.createElement("iframe");
+    sessionIframe.id = "session-iframe";
+    sessionIframe.style.position = "fixed";
+    sessionIframe.style.top = "0";
+    sessionIframe.style.left = "0";
+    sessionIframe.style.width = "100%";
+    sessionIframe.style.height = "100%";
+    sessionIframe.style.border = "none";
+    sessionIframe.style.display = "flex";
+
     var sessionmodal = document.createElement("div");
     sessionmodal.setAttribute("id", "session-modal");
     // modal.className = "modal";
@@ -1432,7 +1541,7 @@ function Pooler(merchantConfig) {
     sessionmodal.style.width = "100%";
     sessionmodal.style.height = "100%";
     sessionmodal.style.overflow = "auto";
-    sessionmodal.style.backgroundColor = "rgb(0, 0, 0, 0.5)";
+    sessionmodal.style.backgroundColor = "rgb(0, 0, 0, 0.3)";
 
     var modalContent = document.createElement("div");
     // modalContent.className = "modal-content";
@@ -1445,23 +1554,17 @@ function Pooler(merchantConfig) {
     modalContent.style.boxShadow = "0 4px 15px 0 rgba(0,0,0,.2)";
 
     var closeBtn = document.createElement("div");
-    closeBtn.innerHTML = `<svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+    closeBtn.innerHTML = `<svg width="10" height="10" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M11 1L1 11M1 1L11 11" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
       `;
 
-    var svgElement = closeBtn.querySelector("svg");
-    svgElement.addEventListener("click", function () {
-      sessionmodal.style.display = "none";
-      overlay.style.display = "none";
-      sessionmodal.style.backgroundColor = "transparent";
-    });
     // closeBtn.className = "close close-img";
     closeBtn.style.color = "#000";
     closeBtn.style.float = "right";
     closeBtn.style.marginTop = "0px";
     closeBtn.style.position = "absolute";
-    closeBtn.style.right = "-3.5%";
+    closeBtn.style.right = "-6.5%";
     closeBtn.style.top = "1%";
     closeBtn.style.width = "10px";
     closeBtn.style.height = "10px";
@@ -1548,7 +1651,7 @@ function Pooler(merchantConfig) {
     paymentDetails.style.listStyleType = "none";
     paymentDetails.style.display = "flex";
     paymentDetails.style.flexDirection = "column";
-    paymentDetails.style.width = "90%";
+    paymentDetails.style.width = "79%";
     paymentDetails.style.marginBottom = "30px";
     paymentDetails.style.position = "relative";
     paymentDetails.style.marginTop = "30px";
@@ -1674,7 +1777,7 @@ function Pooler(merchantConfig) {
     var copy = document.createElement("div");
     copy.className = "copy";
     // copy.innerHTML = copyIcon;
-    copy.innerHTML = `<svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+    copy.innerHTML = `<svg width="16" height="16" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M4 14C3.06812 14 2.60218 14 2.23463 13.8478C1.74458 13.6448 1.35523 13.2554 1.15224 12.7654C1 12.3978 1 11.9319 1 11V4.2C1 3.0799 1 2.51984 1.21799 2.09202C1.40973 1.71569 1.71569 1.40973 2.09202 1.21799C2.51984 1 3.0799 1 4.2 1H11C11.9319 1 12.3978 1 12.7654 1.15224C13.2554 1.35523 13.6448 1.74458 13.8478 2.23463C14 2.60218 14 3.06812 14 4M11.2 21H17.8C18.9201 21 19.4802 21 19.908 20.782C20.2843 20.5903 20.5903 20.2843 20.782 19.908C21 19.4802 21 18.9201 21 17.8V11.2C21 10.0799 21 9.51984 20.782 9.09202C20.5903 8.7157 20.2843 8.40973 19.908 8.21799C19.4802 8 18.9201 8 17.8 8H11.2C10.0799 8 9.51984 8 9.09202 8.21799C8.7157 8.40973 8.40973 8.7157 8.21799 9.09202C8 9.51984 8 10.0799 8 11.2V17.8C8 18.9201 8 19.4802 8.21799 19.908C8.40973 20.2843 8.7157 20.5903 9.09202 20.782C9.51984 21 10.0799 21 11.2 21Z" stroke="#CBD1EC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
       `;
@@ -1711,12 +1814,13 @@ function Pooler(merchantConfig) {
     var bankDetails = document.createElement("span");
     // bankDetails.className = "payment-detail-bold text-truncate";
     bankDetails.textContent = "LIFEGATE MICROFINANCE BANK";
-    bankDetails.style.width = "200px";
+    bankDetails.style.width = "125px";
     bankDetails.style.whiteSpace = "nowrap";
     bankDetails.style.overflow = "hidden";
     bankDetails.style.textOverflow = "ellipsis";
     bankDetails.style.fontFamily = "GraphikMedium, sans-serif";
     bankDetails.style.fontWeight = "500";
+    bankDetails.style.textAlign = "right";
     bankDetails.style.color = "#000";
     li3.appendChild(bank);
     li3.appendChild(bankDetails);
@@ -1762,7 +1866,7 @@ function Pooler(merchantConfig) {
     // secureTextContainer.className = "absolute footer-text";
     secureTextContainer.style.position = "absolute";
     secureTextContainer.style.top = "100%";
-    secureTextContainer.style.left = "35%";
+    secureTextContainer.style.left = "27%";
     secureTextContainer.style.fontFamily =
       '"GraphikMedium", "Source Sans Pro", sans-serif';
     var htmlContent = document.createElement("div");
@@ -1784,16 +1888,23 @@ function Pooler(merchantConfig) {
     modalContent.appendChild(modalBody);
     modalContent.appendChild(modalFooter);
     sessionmodal.appendChild(modalContent);
-    document.body.appendChild(sessionmodal);
+    // document.body.appendChild(sessionmodal);
+
+    sessionIframe.addEventListener("load", () => {
+      var iframeWindow = sessionIframe.contentWindow;
+      iframeWindow.document.body.appendChild(sessionmodal);
+    });
+
+    document.body.appendChild(sessionIframe);
 
     closeBtn.addEventListener("click", function () {
-      sessionmodal.parentNode.removeChild(sessionmodal);
+      sessionIframe.parentNode.removeChild(sessionIframe);
       sessionmodal.style.display = "none";
       overlay.style.display = "none";
       var childNodes = document.body.childNodes;
       var desiredChild = null;
       for (var i = 0; i < childNodes.length; i++) {
-        if (childNodes[i].id === "session-modal") {
+        if (childNodes[i].id === "session-iframe") {
           desiredChild = childNodes[i];
           break;
         }
@@ -1801,50 +1912,12 @@ function Pooler(merchantConfig) {
       if (desiredChild) {
         var parent = desiredChild.parentNode;
         parent.removeChild(desiredChild);
-        console.log("yeah");
       }
     });
   }
 
   function createDisposableAccount(merchantConfig, config) {
     overlay.style.display = "none";
-    var duration = 1800;
-    var countdown = "";
-    var text = "";
-    var timer = setInterval(function () {
-      var minutes = Math.floor(duration / 60);
-      var seconds = duration % 60;
-      countdown = minutes + ":" + seconds;
-      if (duration <= 0) {
-        showSessionExpirationModal(data);
-        clearInterval(timer);
-        // Merchantmodal.style.display = "none";
-        // overlay.style.display = "none";
-        // document.body.removeChild(Merchantmodal);
-        // Merchantmodal.parentNode.removeChild(Merchantmodal);
-        // clearInterval(timer);
-        // var childNodes = document.body.childNodes;
-        // var desiredChild = null;
-        // for (var i = 0; i < childNodes.length; i++) {
-        //   if (childNodes[i].id === "merchant-modal") {
-        //     desiredChild = childNodes[i];
-        //     break;
-        //   }
-        // }
-        // if (desiredChild) {
-        //   var parent = desiredChild.parentNode;
-        //   parent.removeChild(desiredChild);
-        //   console.log("yeah");
-        // }
-      }
-      duration--;
-      text = `Expires in ${
-        countdown !== undefined ? countdown : ""
-      }`;
-    }, 1000);
-
-    console.log(timer)
-
     showMerchantModal(merchantConfig);
 
     // const data = {

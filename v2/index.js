@@ -1882,3 +1882,10 @@ function Pooler(merchantConfig) {
   payWithPooler();
 }
 //   https://cdn.jsdelivr.net/gh/idris-woodcore/checkout/index.js
+// add callbacks (onSuucess, onCompleted and onCancel)
+// align secure by pooler --> align with the footer
+// validation (checkout shouldnt spin up when all fields are not present)
+// test accross different browsers in order
+// fonts should not be rendered as fallback
+// hover effect on close button
+// Poolerpay.send()
