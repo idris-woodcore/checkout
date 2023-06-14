@@ -1249,26 +1249,26 @@ function Pooler(merchantConfig) {
         parent.removeChild(desiredChild);
       }
     });
-    // setTimeout(function () {
-    //   successModal(data);
-    //   awaitingIframe.parentNode.removeChild(awaitingIframe);
-    //   // window.alert("payment cancelled");
-    //   // socket.addEventListener("close", (event) => {});
-    //   Awaitingmodal.style.display = "none";
-    //   overlay.style.display = "none";
-    //   var childNodes = document.body.childNodes;
-    //   var desiredChild = null;
-    //   for (var i = 0; i < childNodes.length; i++) {
-    //     if (childNodes[i].id === "awaiting-iframe") {
-    //       desiredChild = childNodes[i];
-    //       break;
-    //     }
-    //   }
-    //   if (desiredChild) {
-    //     var parent = desiredChild.parentNode;
-    //     parent.removeChild(desiredChild);
-    //   }
-    // }, 10000);
+    setTimeout(function () {
+      successModal(data);
+      awaitingIframe.parentNode.removeChild(awaitingIframe);
+      // window.alert("payment cancelled");
+      // socket.addEventListener("close", (event) => {});
+      Awaitingmodal.style.display = "none";
+      overlay.style.display = "none";
+      var childNodes = document.body.childNodes;
+      var desiredChild = null;
+      for (var i = 0; i < childNodes.length; i++) {
+        if (childNodes[i].id === "awaiting-iframe") {
+          desiredChild = childNodes[i];
+          break;
+        }
+      }
+      if (desiredChild) {
+        var parent = desiredChild.parentNode;
+        parent.removeChild(desiredChild);
+      }
+    }, 10000);
   }
 
   // SUCCESS MODAL, establishes that payments was successful
