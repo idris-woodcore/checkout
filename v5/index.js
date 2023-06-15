@@ -1883,4 +1883,3 @@ function Pooler(merchantConfig) {
 
   payWithPooler();
 }
-//   https://cdn.jsdelivr.net/gh/idris-woodcore/checkout/index.js
